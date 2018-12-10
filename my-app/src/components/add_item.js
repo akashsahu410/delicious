@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery';
 class Additem extends React.Component{
     state={
       category:this.props.category, //to initialize the category
@@ -12,7 +13,6 @@ class Additem extends React.Component{
       oneplate_price:"",
       twoplate_price:"",
       with_cream:"",
-      refresh:""
     }
 
     handleChange=(e)=>{
@@ -38,8 +38,8 @@ class Additem extends React.Component{
         .then(data=>{
           console.log("add data",data)
           if(data === "item added"){
-              // alert("Changed Successfully")
-              window.location.reload()
+            $('body .close').trigger('click');
+            window.location.reload()
           }
           else{
               alert("Changed failure")
@@ -79,24 +79,8 @@ class Additem extends React.Component{
                             </div>
                             <br/>
                   </form>) : "" }  
-                  {/* add new bread */}
-                  { this.state.category === 'bread' ? 
-                   (<form>
-                            <div class="form-group">
-                                <label for style={text_css} className="header-p">item</label>
-                                <input type="text" name="item" class="form-control" style={input_css} onChange={this.handleChange} />
-                            </div>
-                            <div class="form-group">
-                                <label for style={text_css} className="header-p">half price</label>
-                                <input type="number" name="half_price" class="form-control" style={input_css} onChange={this.handleChange} />
-                            </div>
-                            <div class="form-group">
-                                <label for style={text_css} className="header-p">Full price</label>
-                                <input type="number" name="full_price" class="form-control" style={input_css} onChange={this.handleChange} />
-                            </div>
-                            <br/>
-                  </form>) : "" }  
-                  {/* add new pasta */}
+                  
+                  {/* add new pasta,hotdrinks,drinks,chopsuey,burger,maggi,rice,snacks */}
                   { this.state.category === 'pasta' || this.state.category === 'hotdrinks' ||this.state.category === 'drinks' ||
                   this.state.category === 'chopsuey'||this.state.category === 'burger' || this.state.category === 'maggi' ||
                   this.state.category === 'rice' || this.state.category === 'snacks'? 
@@ -113,7 +97,7 @@ class Additem extends React.Component{
                   </form>) : "" }
 
                   {/* add new chowmein */}
-                  { this.state.category === 'chowmein' || this.state.category === 'soya' ? 
+                  { this.state.category === 'chowmein' || this.state.category === 'soya' || this.state.category === 'bread' ? 
                    (<form>
                             <div class="form-group">
                                 <label for style={text_css} className="header-p">item</label>
@@ -186,7 +170,7 @@ class Additem extends React.Component{
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         )
     }
 }

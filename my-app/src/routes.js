@@ -5,6 +5,7 @@ import Home from './home'
 import Login from './components/login'
 import Forgot_Admin from './components/forgot_admin'
 import Profile from './components/profile'
+import Pasta from './components/food/pasta'
 import jwt from 'jsonwebtoken'
 
 
@@ -47,7 +48,9 @@ class Routes extends React.Component{
                     <Route path="/home" component={Home}/>
                     <Private path="/admin" component={Login}/>
                     <Private path="/forgot_admin" component={Forgot_Admin}/>
-                    <PrivateRoute path="/profile" component={Profile}/> 
+                    <PrivateRoute path="/profile" component={Profile}>
+                        <PrivateRoute path="/pasta" component={Pasta}/>
+                    </PrivateRoute> 
                 </Switch>
             </div>
         )

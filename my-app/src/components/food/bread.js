@@ -36,7 +36,7 @@ class Bread extends React.Component{
                 <div className="row">
                 
                     <div className="col-md-10 text-center marb-50">
-                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addbread" href="#"> Add new item</a><br/>
+                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addbread" href="javascript:;"> Add new item</a><br/>
                       <h1 className="header-h">Bread List</h1>
                       <Additem category="bread"/>
 
@@ -51,7 +51,7 @@ class Bread extends React.Component{
                       
                       <div className="breakfast menu-restaurant" id={`${x._id}`}>
                       <span className="clearfix">
-                      <label for className="menu-title" href="#" data-meal-img="img/restaurant/rib.jpg">{x.item}<br/>Half price<br/>Full price</label>
+                      <label for className="menu-title" data-meal-img="img/restaurant/rib.jpg">{x.item}<br/>Half price<br/>Full price</label>
                         <span className="menu-price"><br/>&#8377;{x.half_price}&nbsp;&nbsp;<br/>&#8377;{x.full_price}
                           <Action key={x.id} param={x} category="bread" />
                         </span>

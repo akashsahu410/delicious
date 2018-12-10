@@ -35,7 +35,7 @@ class Chowmein extends React.Component{
               <div className="row">
               
               <div className="col-md-10 text-center marb-50">
-                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addchowmein" href="#"> Add new item</a><br/>
+                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addchowmein" href="javascript:;"> Add new item</a><br/>
                       <h1 className="header-h">Chowmein List</h1>
                       <Additem category="chowmein"/>
                     {/* <p className="header-p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
@@ -48,7 +48,7 @@ class Chowmein extends React.Component{
                     
                     <div className="breakfast menu-restaurant" id={`${x._id}`}>
                     <span className="clearfix">
-                      <a className="menu-title" data-meal-img="assets/img/restaurant/rib.jpg">{x.item}<br/></a>
+                      <a className="menu-title" data-meal-img="assets/img/restaurant/rib.jpg">&#129378;{x.item}<br/></a>
                       <span className="menu-price">&#8377;{x.half_price}&nbsp;&nbsp;&#8377;{x.full_price}
                         <Action key={x.id} param={x} category="chowmein" />
                       </span>

@@ -1,6 +1,6 @@
 import React from 'react'
 import '../App.css';
-
+import $ from 'jquery';
 class Edit_Item extends React.Component{
     state={
         data:this.props.param,
@@ -56,8 +56,9 @@ class Edit_Item extends React.Component{
           .then(data=>{
             console.log("change data",data)
             if(data === "data changed"){
-                // alert("Changed Successfully")
-                window.location.reload()
+                $('body .close').trigger('click');
+            //    window.location.reload()
+            console.log("sdfds",this.forceUpdate)
             }
             else{
                 alert("Changed failure")
@@ -83,7 +84,7 @@ class Edit_Item extends React.Component{
                     this.state.item_arr.length >0 ? 
                     this.state.item_arr.map(x=>
                         // console.log("sdfsd",x,Object.keys(x))
-                        <form>
+                        Object.keys(x) !== '__v' && <form>
                             <div class="form-group">
                                 <label for style={{textTransform:'uppercase'}} className="header-p">{Object.keys(x)}</label>
                                 <input type="text" class="form-control" style={{textTransform:'uppercase'}} onChange={this.handleChange} defaultValue={x[Object.keys(x)]} name={Object.keys(x)}/>

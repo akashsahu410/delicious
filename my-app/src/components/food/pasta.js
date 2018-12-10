@@ -33,7 +33,7 @@ class Pasta extends React.Component{
                 <div className="container">
                 <div className="row">
                 <div className="col-md-10 text-center marb-50">
-                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addpasta" href="#"> Add new item</a><br/>
+                    <a style={{float:'left'}} className="heading" data-toggle="modal" data-target="#addpasta" href="javascript:;"> Add new item</a><br/>
                       <h1 className="header-h">Pasta List</h1>
                       <Additem category="pasta"/>
                       {/* <p className="header-p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
@@ -44,7 +44,7 @@ class Pasta extends React.Component{
                           
                       <div className="breakfast menu-restaurant" id={`${x._id}`}>
                       <span className="clearfix">
-                        <a className="menu-title" href="#" data-meal-img="assets/img/restaurant/rib.jpg">{x.item}<br/></a>
+                        <label for className="menu-title align-item" href="#" data-meal-img="assets/img/restaurant/rib.jpg">&#127837;{x.item}<br/></label>
                         <span className="menu-price">&#8377;{x.price}&nbsp;&nbsp;
                           <Action key={x.id} param={x} category="pasta" />
                         </span>

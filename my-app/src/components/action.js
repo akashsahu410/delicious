@@ -43,7 +43,7 @@ class Action extends React.Component{
             <div>
                 <a href="#"  data-toggle="modal" data-target={`#edit${this.state.id}`} >Edit</a>&nbsp;&nbsp;
                 <a href="#" onClick={this.delete}>Delete</a>
-                <Edit_Item param={this.state.data} category={this.state.category}/>
+                <Edit_Item param={this.state.data} category={this.state.category} />
             </div>
         )
     }
