@@ -5,7 +5,6 @@ import Home from './home'
 import Login from './components/login'
 import Forgot_Admin from './components/forgot_admin'
 import Profile from './components/profile'
-import Pasta from './components/food/pasta'
 import jwt from 'jsonwebtoken'
 
 
@@ -20,7 +19,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             else{
                 return decoded                            
             }
-        }).email !== null ? <Component {...props} /> : <Redirect to='/login' />) : <Redirect to='/login' />
+        }).email !== null ? <Component {...props} /> : <Redirect to='/admin' />) : <Redirect to='/admin' />
     )} />
   ))
   //to check for login and signup 
@@ -48,9 +47,7 @@ class Routes extends React.Component{
                     <Route path="/home" component={Home}/>
                     <Private path="/admin" component={Login}/>
                     <Private path="/forgot_admin" component={Forgot_Admin}/>
-                    <PrivateRoute path="/profile" component={Profile}>
-                        <PrivateRoute path="/pasta" component={Pasta}/>
-                    </PrivateRoute> 
+                    <PrivateRoute path="/profile" component={Profile}/>
                 </Switch>
             </div>
         )

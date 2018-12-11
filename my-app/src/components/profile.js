@@ -1,6 +1,8 @@
 import React from 'react'
-import {Link,Route} from 'react-router-dom'
+import {Link,Route,Switch,Redirect} from 'react-router-dom'
 import '../App.css';
+import jwt from 'jsonwebtoken'
+
 import Pizza from './food/pizza'
 import Burger from './food/burger'
 import Pasta from './food/pasta'
@@ -16,46 +18,35 @@ import Hotdrinks from './food/hotdrinks'
 import Shakes from './food/shakes'
 import SoyaChaap from './food/soya'
 import NewArrival from './food/newarrival'
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  (<Route {...rest} render={(props) => (
+      localStorage.length>0 ? (jwt.verify(localStorage.getItem("email"), 'pokemon', (err, decoded)=>{
+          if(err){
+              localStorage.clear()
+              console.log("props",props)
+              props.history.push('/admin')
+          }
+          else{
+              return decoded                            
+          }
+      }).email !== null ? <Component {...props} /> : <Redirect to='/login' />) : <Redirect to='/login' />
+  )} />
+))
 class Profile extends React.Component{
-    state={
-      pizza:true,
-      pasta:false,
-      burger:false,
-      sandwich:false,
-      bread:false,
-      chowmein:false,
-      rice:false,
-      snacks:false,
-      maggi:false,
-      chopsuey:false,
-      drinks:false,
-      shakes:false,
-      hot_drinks:false,
-      soya_chaap:false,
-      new_arrivals:false,
-    }
-    
+
     logout=()=>{
         localStorage.clear()
         alert("You Successfully Logged out")
         this.props.history.push('/admin')
     }
-    
-    toggle=(e)=>{
-      console.log("match url",this.props.match.url)
+    check=(e)=>{
       document.documentElement.scrollTop = 0
-      let name=e.target.name
-      for(let i=0;i<Object.keys(this.state).length;i++){
-        let key=Object.keys(this.state)[i]
-        if(key === name){
-          this.setState({[name]:true})
-        }
-        else{
-          this.setState({[key]:false})
-        }
-      }
+      this.props.history.push(`/profile/${e.target.name}`)
     }
-      
+    componentDidMount(){
+      console.log("dsfsd",this.props.match.url)
+    }
     render(){
         return(
           <div class="hold-transition skin-blue sidebar-mini">
@@ -86,7 +77,7 @@ class Profile extends React.Component{
                             {/* Menu Toggle Button */}
                             <a href="javascript:void(0);" className="dropdown-toggle">
                               {/* The user image in the navbar*/}
-                              <img src="dist/img/user2-160x160.jpg" className="user-image" alt="User Image" />
+                              <img src="/dist/img/user2-160x160.jpg" className="user-image" alt="User Image" />
                               {/* hidden-xs hides the username on small devices so only the image appears. */}
                               <span className="hidden-xs">Logout</span>
                             </a>
@@ -106,7 +97,7 @@ class Profile extends React.Component{
                       {/* Sidebar user panel (optional) */}
                       <div className="user-panel">
                         <div className="pull-left image">
-                          <img src="dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+                          <img src="/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
                         </div>
                         <div className="pull-left info">
                           <p>Delicious</p>
@@ -128,94 +119,93 @@ class Profile extends React.Component{
                         <li className="header">MAIN NAVIGATION</li>
                         {/* Optionally, you can add icons to the links */}
 
-                        <li className="treeview" name="pizza" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="pizza">
+                        <li className="active treeview">
+                          <a href="javascript:;" name="pizza" onClick={this.check}>
                               Pizza
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="pasta" onClick={this.toggle}>
-                          <Link to="/profile/pasta"><a href="#" name="pasta">
+                        <li className="treeview">
+                          <a href="javascript:;" name="pasta" onClick={this.check}>
                               Pasta
                           </a>
-                          </Link>
                         </li>
 
                         
-                        <li className="treeview"  name="burger" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="burger">
+                        <li className="treeview">
+                        <a href="javascript:;" name="burger" onClick={this.check}>
                               Burger
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="sandwich" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="sandwich">
+                        <li className="treeview">
+                        <a href="javascript:;" name="sandwich" onClick={this.check}>
                               Sandwiches
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="bread" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="bread">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="bread" onClick={this.check}>
                               Breads
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="chowmein" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="chowmein">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="chowmein" onClick={this.check}>
                               Chowmein
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="rice" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="rice">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="rice" onClick={this.check}>
                               Rice and Manchurian
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="snacks" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="snacks">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="snacks" onClick={this.check}>
                               Snacks
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="maggi" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="maggi">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="maggi" onClick={this.check}>
                               Maggi
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="chopsuey" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="chopsuey">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="chopsuey" onClick={this.check}>
                               Chopsuey
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="drinks" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="drinks">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="drinks" onClick={this.check}>
                               Drinks
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="shakes" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="shakes">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="shakes" onClick={this.check}>
                               Shakes
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="hot_drinks" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="hot_drinks">
+                        <li className="treeview" >
+                        <a href="javascript:;" name="hotdrinks" onClick={this.check}>
                               Hot Drinks
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="soya_chaap" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="soya_chaap">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="soya" onClick={this.check}>
                               Soya Chaap
                           </a>
                         </li>
                         
-                        <li className="treeview"  name="new_arrivals" onClick={this.toggle}>
-                          <a href="javascript:void(0);" name="new_arrivals">
+                        <li className="treeview" >
+                          <a href="javascript:;" name="newarrival" onClick={this.check}>
                               New Arrivals
                           </a>
                         </li>
@@ -230,9 +220,26 @@ class Profile extends React.Component{
                     
                     {/* Main content */}
                     <section className="content container-fluid">
-                          {this.state.pizza ? <Pizza/> :""}
+                    <Switch>
+                        <PrivateRoute exact path={`${this.props.match.url}`} component={Pizza}/>
+                        <PrivateRoute path={`${this.props.match.url}/pizza`} component={Pizza}/>
+                        <PrivateRoute path={`${this.props.match.url}/pasta`} component={Pasta}/>
+                        <Route path={`${this.props.match.url}/burger`} component={Burger}></Route>
+                        <Route path={`${this.props.match.url}/snacks`} component={Snacks}></Route>
+                        <Route path={`${this.props.match.url}/bread`} component={Bread}></Route>
+                        <Route path={`${this.props.match.url}/sandwich`} component={Sandwich}></Route>
+                        <Route path={`${this.props.match.url}/chowmein`} component={Chowmein}></Route>
+                        <Route path={`${this.props.match.url}/rice`} component={Rice}></Route>
+                        <Route path={`${this.props.match.url}/maggi`} component={Maggi}></Route>
+                        <Route path={`${this.props.match.url}/chopsuey`} component={Chopsuey}></Route>
+                        <Route path={`${this.props.match.url}/drinks`} component={Drinks}></Route>
+                        <Route path={`${this.props.match.url}/shakes`} component={Shakes}></Route>
+                        <Route path={`${this.props.match.url}/hotdrinks`} component={Hotdrinks}></Route>
+                        <Route path={`${this.props.match.url}/soya`} component={SoyaChaap}></Route>
+                        <Route path={`${this.props.match.url}/newarrival`} component={NewArrival}></Route>
+                      </Switch>
+                          {/* {this.state.pizza ? <Pizza/> :""}
                           {this.state.pasta ? <Pasta/> :""}
-                          {/* <Route path={`profile/pasta`} component={Pasta} /> */}
                           {this.state.burger ? <Burger/> :""}
                           {this.state.sandwich ? <Sandwich/> :""}
                           {this.state.bread ? <Bread/> :""}
@@ -245,7 +252,7 @@ class Profile extends React.Component{
                           {this.state.shakes ? <Shakes/> :""}
                           {this.state.hot_drinks ? <Hotdrinks/> :""}
                           {this.state.soya_chaap ? <SoyaChaap/> :""}
-                          {this.state.new_arrivals ? <NewArrival/> :""}
+                          {this.state.new_arrivals ? <NewArrival/> :""} */}
 
                     </section>
                     {/* /.content */}

@@ -11,7 +11,7 @@ class Login extends React.Component{
         passwordValid:""
     }
     handleChange=(e)=>{
-        this.setState({[e.target.name]:e.target.value.toLowercase()})
+        this.setState({[e.target.name]:e.target.value.toLowerCase()})
     }
     email_valid=()=> {
         const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;

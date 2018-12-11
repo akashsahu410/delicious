@@ -1,6 +1,7 @@
 import React from 'react'
 import '../App.css';
 import $ from 'jquery';
+import { hashHistory } from 'react-router'
 class Edit_Item extends React.Component{
     state={
         data:this.props.param,
@@ -57,8 +58,8 @@ class Edit_Item extends React.Component{
             console.log("change data",data)
             if(data === "data changed"){
                 $('body .close').trigger('click');
-            //    window.location.reload()
-            console.log("sdfds",this.forceUpdate)
+                // this.props.history.push(`profile/${this.state.category}`)
+                window.location.reload()
             }
             else{
                 alert("Changed failure")
@@ -103,16 +104,6 @@ class Edit_Item extends React.Component{
               </div>
             </div>
 
-
-                {/* {
-                    this.state.item_arr.length >0 ? 
-                    this.state.item_arr.map(x=>
-                        // console.log("sdfsd",x,Object.keys(x))
-                        <input type="text" class="form-control input-sm" onChange={this.handleChange} defaultValue={x[Object.keys(x)]} name={Object.keys(x)}/>                              
-                    )
-                    : ""
-                }
-                <button type="submit" onClick={this.changeData}class="btn btn-warning btn-xs">Submit</button> */}
             </div>
         )
     }
